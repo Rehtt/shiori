@@ -16,7 +16,8 @@
     "username": "ユーザー名",
     "password": "パスワード",
     "remember_me": "ログイン状態を保持する",
-    "login_failed": "ログインに失敗しました。認証情報を確認してください。"
+    "login_failed": "ログインに失敗しました。認証情報を確認してください。",
+    "user": "ユーザー"
   },
   "navigation": {
     "home": "ホーム",

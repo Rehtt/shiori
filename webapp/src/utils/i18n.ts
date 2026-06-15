@@ -4,22 +4,47 @@ import es from '@/locales/es.json'
 import fr from '@/locales/fr.json'
 import de from '@/locales/de.json'
 import ja from '@/locales/ja.json'
+import zh_CN from '@/locales/zh_CN.json'
 
 // Define supported languages
-export type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'ja';
+export type SupportedLocale = 'en' | 'es' | 'fr' | 'de' | 'ja' | 'zh_CN';
+
+const supportedLocales: SupportedLocale[] = ['en', 'es', 'fr', 'de', 'ja', 'zh_CN']
+
+const htmlLangMap: Record<SupportedLocale, string> = {
+  en: 'en',
+  es: 'es',
+  fr: 'fr',
+  de: 'de',
+  ja: 'ja',
+  zh_CN: 'zh-CN'
+}
+
+const normalizeLocale = (lang: string | null): SupportedLocale | null => {
+  if (!lang) return null
+
+  const normalizedLang = lang.replace('-', '_')
+  if (supportedLocales.includes(normalizedLang as SupportedLocale)) {
+    return normalizedLang as SupportedLocale
+  }
+
+  const baseLang = normalizedLang.split('_')[0]
+  if (baseLang === 'zh') {
+    return 'zh_CN'
+  }
+
+  return supportedLocales.includes(baseLang as SupportedLocale) ? baseLang as SupportedLocale : null
+}
 
 // Get the browser language or use English as fallback
 const getBrowserLanguage = (): SupportedLocale => {
-  const browserLang = navigator.language.split('-')[0]
-  return ['en', 'es', 'fr', 'de', 'ja'].includes(browserLang) ? browserLang as SupportedLocale : 'en'
+  return normalizeLocale(navigator.language) ?? 'en'
 }
 
 // Get the stored language preference or use browser language
 const getStoredLanguage = (): SupportedLocale => {
   const storedLang = localStorage.getItem('shiori-language')
-  return (storedLang && ['en', 'es', 'fr', 'de', 'ja'].includes(storedLang))
-    ? storedLang as SupportedLocale
-    : getBrowserLanguage()
+  return normalizeLocale(storedLang) ?? getBrowserLanguage()
 }
 
 // Create the i18n instance
@@ -32,7 +57,8 @@ const i18n = createI18n({
     es,
     fr,
     de,
-    ja
+    ja,
+    zh_CN
   }
 })
 
@@ -40,10 +66,10 @@ const i18n = createI18n({
 export const setLanguage = (lang: SupportedLocale): void => {
   i18n.global.locale.value = lang
   localStorage.setItem('shiori-language', lang)
-  document.querySelector('html')?.setAttribute('lang', lang)
+  document.querySelector('html')?.setAttribute('lang', htmlLangMap[lang])
 }
 
 // Initialize HTML lang attribute
-document.querySelector('html')?.setAttribute('lang', getStoredLanguage())
+document.querySelector('html')?.setAttribute('lang', htmlLangMap[getStoredLanguage()])
 
 export default i18n

@@ -16,7 +16,8 @@
     "username": "Usuario",
     "password": "Contraseña",
     "remember_me": "Recordarme",
-    "login_failed": "Error al iniciar sesión. Por favor, verifica tus credenciales."
+    "login_failed": "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+    "user": "Usuario"
   },
   "navigation": {
     "home": "Inicio",

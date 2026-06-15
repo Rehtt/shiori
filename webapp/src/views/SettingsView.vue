@@ -12,7 +12,8 @@ const languages = [
   { code: 'es' as SupportedLocale, name: 'Español' },
   { code: 'fr' as SupportedLocale, name: 'Français' },
   { code: 'de' as SupportedLocale, name: 'Deutsch' },
-  { code: 'ja' as SupportedLocale, name: '日本語' }
+  { code: 'ja' as SupportedLocale, name: '日本語' },
+  { code: 'zh_CN' as SupportedLocale, name: '简体中文' }
 ];
 
 const selectedLanguage = ref(locale.value as SupportedLocale);

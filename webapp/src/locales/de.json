@@ -16,7 +16,8 @@
     "username": "Benutzername",
     "password": "Passwort",
     "remember_me": "Angemeldet bleiben",
-    "login_failed": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten."
+    "login_failed": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.",
+    "user": "Benutzer"
   },
   "navigation": {
     "home": "Startseite",
